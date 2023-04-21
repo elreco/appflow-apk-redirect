@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import './Home.css';
 
 const redirectToLatestApk = async () => {
   try {
@@ -22,8 +23,8 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
-      <h1>Redirection en cours...</h1>
+    <div className="container">
+      <h1 className="download-text">Le téléchargement de l'apk Hey Pongo va démarrer...</h1>
     </div>
   );
 }
