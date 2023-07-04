@@ -3,7 +3,7 @@ export default async function handler(req, res) {
   const API_TOKEN = process.env.NEXT_PUBLIC_APPFLOW_API_TOKEN;
   const APP_ID = process.env.NEXT_PUBLIC_APP_ID;
 
-  const response = await fetch(`https://api.ionic.io/apps/${APP_ID}/builds`, {
+  const response = await fetch(`https://api.ionic.io/apps/${APP_ID}/builds?page_size=200`, {
     headers: {
       Authorization: `Bearer ${API_TOKEN}`,
     },
@@ -13,8 +13,8 @@ export default async function handler(req, res) {
     throw new Error(`API request failed with status ${response.status}`);
   }
 
-  const data = await response.json();
-  const apkBuild = data.data.find(
+  const {data} = await response.json();
+  const apkBuild = data.find(
     (build) =>
       build.platform === "ANDROID" &&
       build.environment_name === environment &&
